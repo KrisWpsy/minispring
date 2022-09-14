@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	         http://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.springframework.org/schema/context">
+
+    <!--<bean class="com.sg.gate.minispringstep02.beans.factory.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:token.properties"/>
+    </bean>
+
+    <context:component-scan base-package="com.sg.gate.test.bean"/>-->
+
+    <!--<bean id="userService" class="com.sg.gate.test.bean.UserService">
+        <property name="token" value="RejDlI78hu223Opo983Ds"/>
+    </bean>
+
+    <bean class="com.sg.gate.minispringstep02.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <bean id="beforeAdvice" class="com.sg.gate.test.bean.UserServiceBeforeAdvice"/>
+
+    <bean id="methodInterceptor" class="com.sg.gate.minispringstep02.aop.framework.adapter.MethodBeforeAdviceInterceptor">
+        <property name="advice" ref="beforeAdvice"/>
+    </bean>
+
+    <bean id="pointcutAdvisor" class="com.sg.gate.minispringstep02.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="expression" value="execution(* com.sg.gate.test.bean.IUserService.*(..))"/>
+        <property name="advice" ref="methodInterceptor"/>
+    </bean>-->
+
+    <bean id="husband" class="com.sg.gate.test.bean.Husband">
+        <property name="wife" ref="wife"/>
+    </bean>
+
+    <bean id="wife" class="com.sg.gate.test.bean.Wife">
+        <property name="husband" ref="husband"/>
+        <property name="mother" ref="husbandMother"/>
+    </bean>
+
+    <bean id="husbandMother" class="com.sg.gate.test.bean.HusbandMother"/>
+
+    <!--AOP配置， 验证三级缓存-->
+    <bean class="com.sg.gate.minispringstep02.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <bean id="beforeAdvice" class="com.sg.gate.test.bean.SpouseAdvice"/>
+
+    <bean id="methodInterceptor" class="com.sg.gate.minispringstep02.aop.framework.adapter.MethodBeforeAdviceInterceptor">
+        <property name="advice" ref="beforeAdvice"/>
+    </bean>
+
+    <bean id="pointcutAdvisor" class="com.sg.gate.minispringstep02.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="expression" value="execution(* com.sg.gate.test.bean.Wife.*(..))"/>
+        <property name="advice" ref="methodInterceptor"/>
+    </bean>
+
+</beans>
+        <!--<beans>-->
+
+        <!--<bean id="userDao" class="com.sg.gate.test.bean.UserDao" init-method="initDataMethod" destroy-method="destroyDataMethod"/>-->
+
+        <!--<bean id="userService" class="com.sg.gate.test.bean.UserService" scope="prototype">
+            <property name="uId" value="10001"/>
+            <property name="company" value="腾讯"/>
+            <property name="location" value="深圳"/>
+            <property name="userDao" ref="proxyUserDao"/>
+        </bean>
+
+        <bean id="proxyUserDao" class="com.sg.gate.test.bean.ProxyBeanFactory"/>-->
+
+        <!--<bean class="com.sg.gate.test.common.MyBeanPostProcessor"/>
+        <bean class="com.sg.gate.test.common.MyBeanFactoryPostProcessor"/>-->
+
+
+        <!--<bean class="com.sg.gate.test.event.ContextRefreshedEventListener"/>
+
+        <bean class="com.sg.gate.test.event.CustomEventListener"/>
+
+        <bean class="com.sg.gate.test.event.ContextClosedEventListener"/>-->
+
+        <!--<bean id="userService" class="com.sg.gate.test.bean.UserService"/>
+
+        <bean class="com.sg.gate.minispringstep02.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+        <bean id="beforeAdvice" class="com.sg.gate.test.bean.UserServiceBeforeAdvice"/>
+
+        <bean id="methodInterceptor" class="com.sg.gate.minispringstep02.aop.framework.adapter.MethodBeforeAdviceInterceptor">
+            <property name="advice" ref="beforeAdvice"/>
+        </bean>
+
+        <bean id="pointcutAdvisor" class="com.sg.gate.minispringstep02.aop.aspectj.AspectJExpressionPointcutAdvisor">
+            <property name="expression" value="execution(* com.sg.gate.test.bean.IUserService.*(..))"/>
+            <property name="advice" ref="methodInterceptor"/>
+        </bean>-->
+
+        <!--</beans>-->
